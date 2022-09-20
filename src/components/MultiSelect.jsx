@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./MultiSelect.css"
+import "../styles/MultiSelect.css"
 export default function MultiSelect() {
   let optionData=[
     {
