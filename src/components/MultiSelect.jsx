@@ -16,22 +16,31 @@ export default function MultiSelect() {
     }
   ]
   const [selected,setSelected]=useState([]);
+  const [searchInput,setSearchInput]=useState([])
   
   const multiSelectHanlder=(e)=>{
      const {value}= e.target;
       if(selected.includes(value)){
-        setSelected(selected.filter(item=>item!==value))
+        setSelected(selected.filter(item=>item!==value));
+        setSearchInput([...selected])
       }
       else{
          let selectedValues= selected;
          selectedValues.push(value);
          setSelected([...selectedValues])
+         setSearchInput([...selected])
       }
   }
   console.log(selected);
   return (
     <div className='multi_select'>
-       <input type="text" placeholder='Select Value'  value={selected.join(", ")}/> <br />
+       <input contentEditable ='true' type="text" placeholder='Select Value'  value={searchInput.join(", ")}
+       onChange={(e)=>{
+        let tempSearch= searchInput;
+         tempSearch.push(e.target.value)
+        searchInput.push([...tempSearch])
+       }}
+       /> <br />
       <label htmlFor="">Select Values</label> <br />
        <select
           onChange={multiSelectHanlder}
